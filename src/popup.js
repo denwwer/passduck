@@ -47,7 +47,7 @@ function generatePassword() {
   }
 
   let length = parseInt(lengthInput.value);
-  if (length < 6 || length > 128) {
+  if (length < 8 || length > 128) {
     showNotification('Length must be between 6 and 128');
     return;
   }
@@ -70,7 +70,12 @@ function generatePassword() {
   }
 
   passwordOutput.value = password;
-  chrome.storage.sync.set({ customChars:  customCharsInput.value });
+
+  const settings = {
+    customChars: customCharsInput.value,
+    lengthValue: lengthInput.value
+  }
+  chrome.storage.sync.set({settings});
 }
 
 /**
@@ -112,7 +117,7 @@ function showNotification(message) {
  * Update progress indicator
  * @param value
  */
-function updateSliderBackground(value) {
+function updateSlider(value) {
   const min = parseInt(lengthInput.min);
   const max = parseInt(lengthInput.max);
   const percentage = ((value - min) / (max - min)) * 100;
@@ -129,11 +134,7 @@ passwordOutput.addEventListener('click', function () {
 lengthInput.addEventListener('input', () => {
   const value = lengthInput.value;
   lengthValue.textContent = value;
-  updateSliderBackground(value);
-});
-
-customCharsInput.addEventListener('keypress', (e) => {
-  if (e.key.toLowerCase() === 'enter') generatePassword();
+  updateSlider(value);
 });
 
 customCheckbox.addEventListener('change', () => {
@@ -142,15 +143,21 @@ customCheckbox.addEventListener('change', () => {
 
 // Generate password on load
 (async function load() {
-  let { customChars } = await chrome.storage.sync.get(['customChars']);
+  let {settings} = await chrome.storage.sync.get(['settings']);
 
-  if (customChars === undefined) {
-    customChars= '@$#-!&<>*()=?%{}/';
-    await chrome.storage.sync.set({ customChars });
+  if (settings === undefined) {
+    settings = {
+      customChars: '@$#-!&<>*()=?%{}[]',
+      lengthValue: 20
+    }
+
+    await chrome.storage.sync.set({settings});
   }
 
-  customCharsInput.value = customChars;
+  customCharsInput.value = settings.customChars;
+  lengthInput.value = settings.lengthValue;
+  lengthValue.textContent = settings.lengthValue;
 
   generatePassword();
-  updateSliderBackground(lengthInput.value);
+  updateSlider(lengthInput.value);
 })();
