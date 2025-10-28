@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Password Generator</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <div class="options-section">
+      <div class="option-group">
+        <div class="checkbox-grid">
+          <label class="checkbox-label">
+            <input type="checkbox" id="numbers" checked>
+            <span>Numbers</span>
+          </label>
+
+          <label class="checkbox-label">
+            <input type="checkbox" id="lowercase" checked>
+            <span>Lowercase</span>
+          </label>
+
+          <label class="checkbox-label">
+            <input type="checkbox" id="custom" checked>
+            <span>Symbols</span>
+          </label>
+
+          <label class="checkbox-label">
+            <input type="checkbox" id="uppercase" checked>
+            <span>Uppercase</span>
+          </label>
+        </div>
+
+        <input
+          type="text"
+          id="customChars"
+          class="custom-input"
+          placeholder="Enter custom characters"
+        >
+      </div>
+
+      <div class="length-section">
+        <label class="length-label">
+          <span>Length:</span>
+          <span id="lengthValue" class="length-value">18</span>
+        </label>
+      </div>
+
+      <div class="slider-container">
+        <input
+            type="range"
+            id="length"
+            min="6"
+            max="128"
+            value="18"
+            class="length-slider"
+        >
+      </div>
+    </div>
+
+    <button id="generateBtn" class="generate-btn">Generate</button>
+
+    <div class="output-section">
+      <input
+        type="text"
+        id="passwordOutput"
+        class="password-output"
+        readonly
+        placeholder="Your password will appear here"
+      >
+      <button id="copyBtn" class="copy-btn" title="Copy to clipboard">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+        </svg>
+      </button>
+    </div>
+
+    <div id="notification" class="notification hidden">Copied</div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
