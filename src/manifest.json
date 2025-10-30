@@ -1,8 +1,9 @@
 {
   "manifest_version": 3,
-  "name": "PassDuck - password generator",
-  "version": "0.0.2",
-  "description": "A lightweight open-source Chrome extension for instantly generating strong, secure passwords",
+  "name": "__MSG_name__",
+  "version": "0.0.3",
+  "description": "__MSG_description__",
+  "default_locale": "en",
   "action": {
     "default_popup": "popup.html",
     "default_icon": {

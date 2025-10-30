@@ -17,6 +17,44 @@ const UPPERCASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 const NUMBERS = '0123456789';
 
 /**
+ * Removes duplicates from custom chars
+ */
+function uniqCustomChars() {
+  customCharsInput.value = [...new Set(customCharsInput.value)].join('');
+}
+
+/**
+ * Generates cryptographically secure random int
+ * @param max
+ * @return {number}
+ */
+function getRandom(max) {
+  const limit = 256 - (256 % max);
+  let val;
+
+  for (; ;) {
+    val = crypto.getRandomValues(new Uint8Array(1))[0];
+    if (val < limit) break;
+  }
+
+  return val % max;
+}
+
+/**
+ * Checks if password has more than 2 duplicate chars
+ * @param password
+ * @return {boolean}
+ */
+function hasDuplicates(password) {
+  for (let i = 0; i < password.length - 2; i++) {
+    if (password[i] === password[i + 1] && password[i] === password[i + 2]) {
+      return true;
+    }
+  }
+  return false;
+}
+
+/**
  * Generate password
  */
 function generatePassword() {
@@ -24,49 +62,56 @@ function generatePassword() {
   const required = [];
 
   if (lowercaseCheckbox.checked) {
-    required.push(LOWERCASE[Math.floor(Math.random() * LOWERCASE.length)]);
+    required.push(LOWERCASE[getRandom(LOWERCASE.length)]);
     charset += LOWERCASE;
   }
   if (uppercaseCheckbox.checked) {
-    required.push(UPPERCASE[Math.floor(Math.random() * UPPERCASE.length)]);
+    required.push(UPPERCASE[getRandom(UPPERCASE.length)]);
     charset += UPPERCASE;
   }
   if (numbersCheckbox.checked) {
-    required.push(NUMBERS[Math.floor(Math.random() * NUMBERS.length)]);
+    required.push(NUMBERS[getRandom(NUMBERS.length)]);
     charset += NUMBERS;
   }
 
   if (customCheckbox.checked && customCharsInput.value) {
-    required.push(customCharsInput.value[Math.floor(Math.random() * customCharsInput.value.length)]);
+    uniqCustomChars();
+    required.push(customCharsInput.value[getRandom(customCharsInput.value.length)]);
     charset += customCharsInput.value;
   }
 
   if (charset === '') {
-    showNotification('Please select at least one option');
+    showNotification(chrome.i18n.getMessage('required_select'));
     return;
   }
 
-  let length = parseInt(lengthInput.value);
+  let length = Number(lengthInput.value);
   if (length < 8 || length > 128) {
-    showNotification('Length must be between 6 and 128');
+    showNotification(chrome.i18n.getMessage('required_length'));
     return;
   }
 
-  const randomValues = new Uint32Array(length);
-  crypto.getRandomValues(randomValues);
+  let password;
+  let tries = 10;
 
-  let password = required.join('');
-  const charsetLength = charset.length;
+  for (; ;) {
+    password = required.join('');
 
-  for (let i = password.length; i < length; i++) {
-    password += charset[randomValues[i] % charsetLength];
-  }
+    for (let i = password.length; i < length; i++) {
+      password += charset[getRandom(charset.length)];
+    }
 
-  // Fisher-Yates shuffle
-  const passwordArray = password.split('');
-  for (let i = passwordArray.length - 1; i > 0; i--) {
-    const j = randomValues[i] % (i + 1);
-    [passwordArray[i], passwordArray[j]] = [passwordArray[j], passwordArray[i]];
+    // Fisher-Yates shuffle
+    const passwordArray = password.split('');
+    for (let i = passwordArray.length - 1; i > 0; i--) {
+      const j = getRandom(i + 1);
+      [passwordArray[i], passwordArray[j]] = [passwordArray[j], passwordArray[i]];
+    }
+
+    password = passwordArray.join('');
+    tries--;
+
+    if (!tries || !hasDuplicates(password)) break;
   }
 
   passwordOutput.value = password;
@@ -93,9 +138,9 @@ async function copyToClipboard() {
     setTimeout(() => {
       copyBtn.disabled = false;
     }, 2000);
-    showNotification('Copied to clipboard');
+    showNotification(chrome.i18n.getMessage('copied'));
   } catch (err) {
-    showNotification('Clipboard error');
+    showNotification(chrome.i18n.getMessage('copied_error'));
     console.error('Clipboard error:', err.message);
   }
 }
@@ -118,8 +163,8 @@ function showNotification(message) {
  * @param value
  */
 function updateSlider(value) {
-  const min = parseInt(lengthInput.min);
-  const max = parseInt(lengthInput.max);
+  const min = Number(lengthInput.min);
+  const max = Number(lengthInput.max);
   const percentage = ((value - min) / (max - min)) * 100;
   lengthInput.style.background = `linear-gradient(to right, var(--accent-color) 0%, var(--accent-color) ${percentage}%, var(--border-color) ${percentage}%, var(--border-color) 100%)`;
 }
@@ -134,6 +179,8 @@ passwordOutput.addEventListener('click', function () {
 lengthInput.addEventListener('input', () => {
   const value = lengthInput.value;
   lengthValue.textContent = value;
+
+  generatePassword();
   updateSlider(value);
 });
 
@@ -142,7 +189,7 @@ customCheckbox.addEventListener('change', () => {
 });
 
 // Generate password on load
-(async function load() {
+async function init() {
   let {settings} = await chrome.storage.sync.get(['settings']);
 
   if (settings === undefined) {
@@ -160,4 +207,22 @@ customCheckbox.addEventListener('change', () => {
 
   generatePassword();
   updateSlider(lengthInput.value);
+}
+
+// Set localized labels
+async function locale() {
+  numbersCheckbox.nextElementSibling.textContent = chrome.i18n.getMessage('numbers');
+  lowercaseCheckbox.nextElementSibling.textContent = chrome.i18n.getMessage('lowercase');
+  customCheckbox.nextElementSibling.textContent = chrome.i18n.getMessage('symbols');
+  uppercaseCheckbox.nextElementSibling.textContent = chrome.i18n.getMessage('uppercase');
+
+  customCharsInput.setAttribute('placeholder', chrome.i18n.getMessage('custom_chars'))
+  lengthValue.previousElementSibling.textContent = chrome.i18n.getMessage('length') + ':';
+  generateBtn.textContent = chrome.i18n.getMessage('generate')
+  copyBtn.setAttribute('title', chrome.i18n.getMessage('copy'))
+}
+
+// Load
+(async function load() {
+  await Promise.all([init(), locale()]);
 })();

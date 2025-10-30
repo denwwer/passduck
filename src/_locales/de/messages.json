@@ -1,0 +1,44 @@
+{
+  "name": {
+    "message": "PassDuck – sicherer Passwortgenerator"
+  },
+  "description": {
+    "message": "Eine leichte Erweiterung zum sofortigen Erstellen starker, sicherer Passwörter"
+  },
+  "numbers": {
+    "message": "Zahlen"
+  },
+  "lowercase": {
+    "message": "Kleinbuchstaben"
+  },
+  "symbols": {
+    "message": "Symbole"
+  },
+  "uppercase": {
+    "message": "Großbuchstaben"
+  },
+  "custom_chars": {
+    "message": "Eigene Zeichen eingeben"
+  },
+  "length": {
+    "message": "Länge"
+  },
+  "generate": {
+    "message": "Generieren"
+  },
+  "copy": {
+    "message": "In Zwischenablage kopieren"
+  },
+  "copied": {
+    "message": "In Zwischenablage kopiert"
+  },
+  "copied_error": {
+    "message": "Zwischenablagefehler"
+  },
+  "required_select": {
+    "message": "Bitte wähle mindestens eine Option aus"
+  },
+  "required_length": {
+    "message": "Die Länge muss zwischen 8 und 128 liegen"
+  }
+}

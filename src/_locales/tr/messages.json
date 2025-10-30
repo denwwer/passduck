@@ -1,0 +1,44 @@
+{
+  "name": {
+    "message": "PassDuck - güvenli şifre oluşturucu"
+  },
+  "description": {
+    "message": "Güçlü ve güvenli şifreleri anında oluşturmak için hafif bir uzantı"
+  },
+  "numbers": {
+    "message": "Sayılar"
+  },
+  "lowercase": {
+    "message": "Küçük harfler"
+  },
+  "symbols": {
+    "message": "Semboller"
+  },
+  "uppercase": {
+    "message": "Büyük harfler"
+  },
+  "custom_chars": {
+    "message": "Özel karakterleri girin"
+  },
+  "length": {
+    "message": "Uzunluk"
+  },
+  "generate": {
+    "message": "Oluştur"
+  },
+  "copy": {
+    "message": "Panoya kopyala"
+  },
+  "copied": {
+    "message": "Panoya kopyalandı"
+  },
+  "copied_error": {
+    "message": "Pano hatası"
+  },
+  "required_select": {
+    "message": "Lütfen en az bir seçenek seçin"
+  },
+  "required_length": {
+    "message": "Uzunluk 8 ile 128 arasında olmalıdır"
+  }
+}
