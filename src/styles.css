@@ -40,7 +40,6 @@ body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
   width: 300px;
-  /*min-height: 330px;*/
   font-size: 13px;
 }
 

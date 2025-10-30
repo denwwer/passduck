@@ -1,0 +1,44 @@
+{
+  "name": {
+    "message": "PassDuck — генератор безпечних паролів"
+  },
+  "description": {
+    "message": "Легке розширення для миттєвого створення надійних і безпечних паролів"
+  },
+  "numbers": {
+    "message": "Цифри"
+  },
+  "lowercase": {
+    "message": "Малі літери"
+  },
+  "symbols": {
+    "message": "Символи"
+  },
+  "uppercase": {
+    "message": "Великі літери"
+  },
+  "custom_chars": {
+    "message": "Введіть власні символи"
+  },
+  "length": {
+    "message": "Довжина"
+  },
+  "generate": {
+    "message": "Згенерувати"
+  },
+  "copy": {
+    "message": "Скопіювати в буфер обміну"
+  },
+  "copied": {
+    "message": "Скопійовано в буфер обміну"
+  },
+  "copied_error": {
+    "message": "Помилка буфера обміну"
+  },
+  "required_select": {
+    "message": "Будь ласка, виберіть принаймні один параметр"
+  },
+  "required_length": {
+    "message": "Довжина повинна бути від 8 до 128"
+  }
+}

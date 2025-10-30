@@ -1,0 +1,44 @@
+{
+  "name": {
+    "message": "PassDuck - secure password generator"
+  },
+  "description": {
+    "message": "A lightweight extension for instantly generating strong, secure passwords"
+  },
+  "numbers": {
+    "message": "Numbers"
+  },
+  "lowercase": {
+    "message": "Lowercase"
+  },
+  "symbols": {
+    "message": "Symbols"
+  },
+  "uppercase": {
+    "message": "Uppercase"
+  },
+  "custom_chars": {
+    "message": "Enter custom characters"
+  },
+  "length": {
+    "message": "Length"
+  },
+  "generate": {
+    "message": "Generate"
+  },
+  "copy": {
+    "message": "Copy to clipboard"
+  },
+  "copied": {
+    "message": "Copied to clipboard"
+  },
+  "copied_error": {
+    "message": "Clipboard error"
+  },
+  "required_select": {
+    "message": "Please select at least one option"
+  },
+  "required_length": {
+    "message": "Length must be between 8 and 128"
+  }
+}

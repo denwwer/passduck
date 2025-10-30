@@ -1,0 +1,44 @@
+{
+  "name": {
+    "message": "PassDuck - generatore di password sicure"
+  },
+  "description": {
+    "message": "Un'estensione leggera per generare immediatamente password forti e sicure"
+  },
+  "numbers": {
+    "message": "Numeri"
+  },
+  "lowercase": {
+    "message": "Minuscole"
+  },
+  "symbols": {
+    "message": "Simboli"
+  },
+  "uppercase": {
+    "message": "Maiuscole"
+  },
+  "custom_chars": {
+    "message": "Inserisci caratteri personalizzati"
+  },
+  "length": {
+    "message": "Lunghezza"
+  },
+  "generate": {
+    "message": "Genera"
+  },
+  "copy": {
+    "message": "Copia negli appunti"
+  },
+  "copied": {
+    "message": "Copiato negli appunti"
+  },
+  "copied_error": {
+    "message": "Errore negli appunti"
+  },
+  "required_select": {
+    "message": "Seleziona almeno un'opzione"
+  },
+  "required_length": {
+    "message": "La lunghezza deve essere compresa tra 8 e 128"
+  }
+}
