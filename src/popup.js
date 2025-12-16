@@ -16,6 +16,9 @@ const LOWERCASE = 'abcdefghijklmnopqrstuvwxyz';
 const UPPERCASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 const NUMBERS = '0123456789';
 
+// User settings
+let settings;
+
 /**
  * Removes duplicates from custom chars
  */
@@ -41,23 +44,24 @@ function getRandom(max) {
 }
 
 /**
- * Checks if password has more than 2 duplicate chars
+ * Checks if a char appears more than 3 times
  * @param password
  * @return {boolean}
  */
 function hasDuplicates(password) {
-  for (let i = 0; i < password.length - 2; i++) {
-    if (password[i] === password[i + 1] && password[i] === password[i + 2]) {
-      return true;
-    }
+  const counts = {};
+  for (const char of password) {
+    counts[char] = (counts[char] || 0) + 1;
+    if (counts[char] > 3) return true;
   }
   return false;
 }
 
 /**
  * Generate password
+ * @param slide
  */
-function generatePassword() {
+function generatePassword(slide) {
   let charset = '';
   const required = [];
 
@@ -116,11 +120,14 @@ function generatePassword() {
 
   passwordOutput.value = password;
 
-  const settings = {
-    customChars: customCharsInput.value,
-    lengthValue: lengthInput.value
+  // Update settings
+  if (settings.customChars !== customCharsInput.value || settings.lengthValue !== lengthInput.value) {
+    settings.customChars = customCharsInput.value;
+    settings.lengthValue = lengthInput.value;
+
+    // Skip for slider live updates to prevent MAX_WRITE_OPERATIONS_PER_MINUTE error
+    if (!slide) chrome.storage.sync.set({settings});
   }
-  chrome.storage.sync.set({settings});
 }
 
 /**
@@ -170,7 +177,7 @@ function updateSlider(value) {
 }
 
 // Event listeners
-generateBtn.addEventListener('click', generatePassword);
+generateBtn.addEventListener('click', () => generatePassword());
 copyBtn.addEventListener('click', copyToClipboard);
 passwordOutput.addEventListener('click', function () {
   this.select();
@@ -179,22 +186,33 @@ passwordOutput.addEventListener('click', function () {
 lengthInput.addEventListener('input', () => {
   const value = lengthInput.value;
   lengthValue.textContent = value;
+  lengthValue.style.color = settings.lengthValue < 12 ? '#666666' : '#ef233c';
 
-  generatePassword();
+  generatePassword(true);
   updateSlider(value);
+});
+
+// Sync settings when user releases slide
+lengthInput.addEventListener('change', () => {
+  chrome.storage.sync.set({settings});
 });
 
 customCheckbox.addEventListener('change', () => {
   customCharsInput.disabled = !customCheckbox.checked;
+  generatePassword();
 });
+
+[lowercaseCheckbox, uppercaseCheckbox, numbersCheckbox].forEach(checkbox => {
+  checkbox.addEventListener('change', () => generatePassword());
+})
 
 // Generate password on load
 async function init() {
-  let {settings} = await chrome.storage.sync.get(['settings']);
+  ({settings} = await chrome.storage.sync.get(['settings']));
 
   if (settings === undefined) {
     settings = {
-      customChars: '@$#-!&<>*()=?%{}[]',
+      customChars: '-<>*()=?{}[]."~|;:_+/', // !@#$%^& - common used
       lengthValue: 20
     }
 
@@ -204,6 +222,10 @@ async function init() {
   customCharsInput.value = settings.customChars;
   lengthInput.value = settings.lengthValue;
   lengthValue.textContent = settings.lengthValue;
+
+  if (settings.lengthValue < 12) {
+    lengthValue.style.color = '#666666';
+  }
 
   generatePassword();
   updateSlider(lengthInput.value);
@@ -217,7 +239,7 @@ async function locale() {
   uppercaseCheckbox.nextElementSibling.textContent = chrome.i18n.getMessage('uppercase');
 
   customCharsInput.setAttribute('placeholder', chrome.i18n.getMessage('custom_chars'))
-  lengthValue.previousElementSibling.textContent = chrome.i18n.getMessage('length') + ':';
+  lengthValue.previousElementSibling.textContent = chrome.i18n.getMessage('length');
   generateBtn.textContent = chrome.i18n.getMessage('generate')
   copyBtn.setAttribute('title', chrome.i18n.getMessage('copy'))
 }
