@@ -19,6 +19,7 @@ Customize length, character sets, and easily copy with one click — all process
 - Edge 88+
 - Brave
 - Any Chromium-based browser with Manifest V3 support
+- Safari 15+
 
 ## Support
 
