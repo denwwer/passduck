@@ -11,7 +11,7 @@ Customize length, character sets, and easily copy with one click — all process
 - ✅ **Custom characters** (configurable)
 - 📋 **One-click copy** to clipboard
 - 🌙 **Dark theme** support (automatic based on system preference)
-- 🔒 **Cryptographically secure** random generation
+- 🔒 **Cryptographically secure** random generation and Fisher-Yates shuffle
 
 ## Browser Compatibility
 
