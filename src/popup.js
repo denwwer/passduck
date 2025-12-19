@@ -64,6 +64,7 @@ function hasDuplicates(password) {
 function generatePassword(slide) {
   let charset = '';
   const required = [];
+  const length = Number(lengthInput.value);
 
   if (lowercaseCheckbox.checked) {
     required.push(LOWERCASE[getRandom(LOWERCASE.length)]);
@@ -75,12 +76,15 @@ function generatePassword(slide) {
   }
   if (numbersCheckbox.checked) {
     required.push(NUMBERS[getRandom(NUMBERS.length)]);
+    if (length >= 12) required.push(NUMBERS[getRandom(NUMBERS.length)]);
+
     charset += NUMBERS;
   }
 
   if (customCheckbox.checked && customCharsInput.value) {
     uniqCustomChars();
     required.push(customCharsInput.value[getRandom(customCharsInput.value.length)]);
+
     charset += customCharsInput.value;
   }
 
@@ -89,7 +93,6 @@ function generatePassword(slide) {
     return;
   }
 
-  let length = Number(lengthInput.value);
   if (length < 8 || length > 128) {
     showNotification(chrome.i18n.getMessage('required_length'));
     return;
@@ -176,6 +179,18 @@ function updateSlider(value) {
   lengthInput.style.background = `linear-gradient(to right, var(--accent-color) 0%, var(--accent-color) ${percentage}%, var(--border-color) ${percentage}%, var(--border-color) 100%)`;
 }
 
+function setLengthColor(value) {
+  let color = '#ef233c';
+
+  if (value <= 12) {
+    color = '#666666';
+  } else if (value >= 100) {
+    color = '#029f96';
+  }
+
+  lengthValue.style.color = color;
+}
+
 // Event listeners
 generateBtn.addEventListener('click', () => generatePassword());
 copyBtn.addEventListener('click', copyToClipboard);
@@ -186,8 +201,8 @@ passwordOutput.addEventListener('click', function () {
 lengthInput.addEventListener('input', () => {
   const value = lengthInput.value;
   lengthValue.textContent = value;
-  lengthValue.style.color = settings.lengthValue < 12 ? '#666666' : '#ef233c';
 
+  setLengthColor(value);
   generatePassword(true);
   updateSlider(value);
 });
@@ -212,7 +227,7 @@ async function init() {
 
   if (settings === undefined) {
     settings = {
-      customChars: '-<>*()=?{}[]."~|;:_+/', // !@#$%^& - common used
+      customChars: '-<>*()=?{}[]."~|;:_+,/', // !@#$%^& - common used
       lengthValue: 20
     }
 
@@ -223,9 +238,7 @@ async function init() {
   lengthInput.value = settings.lengthValue;
   lengthValue.textContent = settings.lengthValue;
 
-  if (settings.lengthValue < 12) {
-    lengthValue.style.color = '#666666';
-  }
+  setLengthColor(settings.lengthValue);
 
   generatePassword();
   updateSlider(lengthInput.value);
@@ -239,12 +252,12 @@ async function locale() {
   uppercaseCheckbox.nextElementSibling.textContent = chrome.i18n.getMessage('uppercase');
 
   customCharsInput.setAttribute('placeholder', chrome.i18n.getMessage('custom_chars'))
-  lengthValue.previousElementSibling.textContent = chrome.i18n.getMessage('length');
   generateBtn.textContent = chrome.i18n.getMessage('generate')
   copyBtn.setAttribute('title', chrome.i18n.getMessage('copy'))
 }
 
 // Load
 (async function load() {
+  // init
   await Promise.all([init(), locale()]);
 })();

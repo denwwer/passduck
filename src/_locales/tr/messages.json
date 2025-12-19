@@ -20,9 +20,6 @@
   "custom_chars": {
     "message": "Özel karakterleri girin"
   },
-  "length": {
-    "message": "Uzunluk"
-  },
   "generate": {
     "message": "Oluştur"
   },

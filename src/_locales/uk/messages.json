@@ -20,9 +20,6 @@
   "custom_chars": {
     "message": "Введіть власні символи"
   },
-  "length": {
-    "message": "Довжина"
-  },
   "generate": {
     "message": "Згенерувати"
   },

@@ -20,9 +20,6 @@
   "custom_chars": {
     "message": "Eigene Zeichen eingeben"
   },
-  "length": {
-    "message": "Länge"
-  },
   "generate": {
     "message": "Generieren"
   },

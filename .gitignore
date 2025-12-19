@@ -13,3 +13,5 @@ node_modules
 *.vsix
 
 passduck.zip
+safari
+PassDuck*
