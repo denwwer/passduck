@@ -1,6 +1,6 @@
 {
   "name": {
-    "message": "PassDuck - générateur de mots de passe sécurisé"
+    "message": "PassDuck – Générateur de mots de passe"
   },
   "description": {
     "message": "Une extension légère pour générer instantanément des mots de passe forts et sécurisés"
