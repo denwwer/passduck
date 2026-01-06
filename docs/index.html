@@ -1,15 +1,15 @@
-<!DOCTYPE html><html lang=en><meta charset=UTF-8><meta name=viewport content="width=device-width, initial-scale=1.0"><meta name=keywords content="password generator, browser extension, online security, privacy tools"><title>PassDuck</title><link rel=icon type=image/png sizes=96x96 href=/passduck/logo.59c21380.png><link href=/passduck/landing.9652f5d8.css rel=stylesheet><script>function isSafari(){return/^((?!chrome|chromium|android).)*safari/i.test(navigator.userAgent)}function isChromium(){return!!window.chrome&&/chrome|chromium|crios/i.test(navigator.userAgent)}document.addEventListener("DOMContentLoaded",()=>{document.getElementById("year").innerText=new Date().getFullYear().toString(),isChromium()?document.getElementById("browser-1").hidden=!1:isSafari()&&(document.getElementById("browser-2").hidden=!1)});</script><body>
+<!DOCTYPE html><html lang=en><meta charset=UTF-8><meta name=viewport content="width=device-width, initial-scale=1.0"><meta name=keywords content="password generator, browser extension, online security, privacy tools"><title>PassDuck</title><link rel=icon type=image/png sizes=96x96 href=/passduck/logo.59c21380.png><link href=/passduck/landing.07aa79f6.css rel=stylesheet><script>function isSafari(){return/^((?!chrome|chromium|android).)*safari/i.test(navigator.userAgent)}function isChromium(){return!!window.chrome&&/chrome|chromium|crios/i.test(navigator.userAgent)}document.addEventListener("DOMContentLoaded",()=>{document.getElementById("year").innerText=new Date().getFullYear().toString(),isChromium()?document.getElementById("browser-1").hidden=!1:isSafari()&&(document.getElementById("browser-2").hidden=!1),document.getElementById("source").hidden=!1});</script><body>
 
 <header class="border-b border-primary px-6 py-10 text-center">
   <h1 class=title>
     <span class=inline>
-      <img id=duck class="cursor-pointer relative top-2" src=/passduck/logo.59c21380.png width=15% alt=PassDuck>PassDuck
+      <img id=duck class="cursor-pointer relative top-2" src=/passduck/logo.59c21380.png width=32 height=32 alt=PassDuck>PassDuck
     </span>
   </h1>
   <p class="font-light max-w-md mt-4 mx-auto text-secondary">
     A lightweight extension for instantly generating strong, <br> secure passwords.
   </p>
-  <div class="flex gap-8 justify-center mt-8">
+  <div class="flex gap-8 justify-center min-h-10 mt-8">
     <a hidden id=browser-1 href=https://chromewebstore.google.com/detail/nenogephcifkngdiakjgojpjdhekhkpj class="btn-icon button icon-chrome">
       <div class=icon-embed-sm>
         <svg xmlns:xmlns=http://www.w3.org/2000/svg width=24 height=24 aria-hidden=true class="iconify iconify--simple-icons" role=img viewBox="0 0 24 24"><path fill=currentColor d="M12 0C8.21 0 4.831 1.757 2.632 4.501l3.953 6.848A5.454 5.454 0 0 1 12 6.545h10.691A12 12 0 0 0 12 0M1.931 5.47A11.94 11.94 0 0 0 0 12c0 6.012 4.42 10.991 10.189 11.864l3.953-6.847a5.45 5.45 0 0 1-6.865-2.29Zm13.342 2.166a5.446 5.446 0 0 1 1.45 7.09l.002.001h-.002l-5.344 9.257q.309.015.621.016c6.627 0 12-5.373 12-12 0-1.54-.29-3.011-.818-4.364ZM12 16.364a4.364 4.364 0 1 1 0-8.728 4.364 4.364 0 0 1 0 8.728"/></svg>
@@ -43,7 +43,7 @@
         </svg>
     </a>
 
-    <a href=https://github.com/denwwer/passduck class="btn-icon button icon-github">
+    <a hidden id=source href=https://github.com/denwwer/passduck class="btn-icon button icon-github">
       <div>
         <svg xmlns:xmlns=http://www.w3.org/2000/svg width=16 height=16 viewBox="0 0 98 96"><path fill=#fff fill-rule=evenodd d="M48.854 0C21.839 0 0 22 0 49.217c0 21.756 13.993 40.172 33.405 46.69 2.427.49 3.316-1.059 3.316-2.362 0-1.141-.08-5.052-.08-9.127-13.59 2.934-16.42-5.867-16.42-5.867-2.184-5.704-5.42-7.17-5.42-7.17-4.448-3.015.324-3.015.324-3.015 4.934.326 7.523 5.052 7.523 5.052 4.367 7.496 11.404 5.378 14.235 4.074.404-3.178 1.699-5.378 3.074-6.6-10.839-1.141-22.243-5.378-22.243-24.283 0-5.378 1.94-9.778 5.014-13.2-.485-1.222-2.184-6.275.486-13.038 0 0 4.125-1.304 13.426 5.052a47 47 0 0 1 12.214-1.63c4.125 0 8.33.571 12.213 1.63 9.302-6.356 13.427-5.052 13.427-5.052 2.67 6.763.97 11.816.485 13.038 3.155 3.422 5.015 7.822 5.015 13.2 0 18.905-11.404 23.06-22.324 24.283 1.78 1.548 3.316 4.481 3.316 9.126 0 6.6-.08 11.897-.08 13.526 0 1.304.89 2.853 3.316 2.364 19.412-6.52 33.405-24.935 33.405-46.691C97.707 22 75.788 0 48.854 0" clip-rule=evenodd /></svg>
       </div>
@@ -56,7 +56,7 @@
 <section class="border-b border-primary px-6 py-16">
   <div class="gap-10 grid items-center max-w-5xl md:grid-cols-2 mx-auto">
     <div class="from-left screenshot">
-      <img src=/passduck/s-1.653fc6b9.png width=80%>
+      <img src=/passduck/s-1.653fc6b9.png width=400 height=400>
     </div>
     <div class="md:text-left text-center">
       <h2 class="font-bold my-3 text-2xl">Secure &amp; Customizable</h2>
@@ -81,7 +81,7 @@
       </ul>
     </div>
     <div class="from-right md:order-2 order-1 screenshot">
-      <img src=/passduck/s-2.20448372.png width=80%>
+      <img src=/passduck/s-2.20448372.png width=400 height=400>
     </div>
   </div>
 </section>

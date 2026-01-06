@@ -25,6 +25,8 @@
       } else if (isSafari()) {
         document.getElementById('browser-2').hidden = false;
       }
+
+      document.getElementById('source').hidden = false;
     });
   </script>
 </head>
@@ -33,13 +35,13 @@
 <header class="py-10 px-6 text-center border-b border-primary">
   <h1 class="title">
     <span class="inline">
-      <img id="duck" class="relative top-2 cursor-pointer" src="logo.png" width="15%" alt="PassDuck">PassDuck
+      <img id="duck" class="relative top-2 cursor-pointer" src="logo.png" width="32" height="32" alt="PassDuck">PassDuck
     </span>
   </h1>
   <p class="mt-4 text-secondary max-w-md mx-auto font-light">
     A lightweight extension for instantly generating strong, <br /> secure passwords.
   </p>
-  <div class="mt-8 flex gap-8 justify-center">
+  <div class="mt-8 min-h-10 flex gap-8 justify-center">
     <a hidden id="browser-1" href="https://chromewebstore.google.com/detail/nenogephcifkngdiakjgojpjdhekhkpj"
        class="button btn-icon icon-chrome">
       <div class="icon-embed-sm">
@@ -132,7 +134,7 @@
       </svg>
     </a>
 
-    <a href="https://github.com/denwwer/passduck" class="button btn-icon icon-github">
+    <a hidden id="source" href="https://github.com/denwwer/passduck" class="button btn-icon icon-github">
       <div>
         <svg width="16" height="16" viewBox="0 0 98 96" xmlns="http://www.w3.org/2000/svg">
           <path fill-rule="evenodd" clip-rule="evenodd"
@@ -149,7 +151,7 @@
 <section class="py-16 px-6 border-b border-primary">
   <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-10 items-center">
     <div class="screenshot from-left">
-      <img src="s-1.png" width="80%">
+      <img src="s-1.png" width="400" height="400">
     </div>
     <div class="text-center md:text-left">
       <h2 class="text-2xl font-bold my-3">Secure & Customizable</h2>
@@ -174,7 +176,7 @@
       </ul>
     </div>
     <div class="screenshot from-right order-1 md:order-2">
-      <img src="s-2.png" width="80%">
+      <img src="s-2.png" width="400" height="400">
     </div>
   </div>
 </section>
