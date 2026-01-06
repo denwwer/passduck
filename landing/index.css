@@ -1,0 +1,101 @@
+@import "tailwindcss";
+
+
+:root {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f5f5f5;
+  --bg-dark: #1e1e1e;
+  --bg-input: #ffffff;
+  --text-primary: #1a1a1a;
+  --text-secondary: #666666;
+  --text-dark: #e5e5e5;
+  --border-color: #d1d5db;
+  --accent-color: #ef233c;
+  --accent-hover: #029f96;
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', Arial, sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.title {
+  @apply text-4xl md:text-5xl font-bold flex items-center justify-center;
+  color: var(--accent-color);
+}
+
+#duck {
+  transition: transform 0.5s ease;
+}
+
+.border-primary {
+  border-color: var(--border-color);
+}
+
+.bg-secondary {
+  background-color: var(--bg-secondary);
+}
+
+.bg-dark {
+  background-color: var(--bg-dark);
+}
+
+.text-dark {
+  color: var(--text-dark);
+}
+
+.button {
+  text-align: center;
+  border-radius: .6rem;
+  padding: .5rem 1rem;
+  font-weight: 500;
+  transition: box-shadow .2s, background-color .2s;
+}
+
+.button:hover {
+  /*background-color: #474747;*/
+  box-shadow: 0 9px 17px #0000001f;
+}
+
+.button.btn-icon.icon-chrome {
+  color: #000;
+  background-color: #c5e3ff;
+}
+
+.button.btn-icon.icon-github {
+  color: white;
+  background-color: #000;
+}
+
+.button.btn-icon {
+  grid-column-gap: .75rem;
+  grid-row-gap: .75rem;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  display: flex;
+}
+
+.icon-embed-sm {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 1rem;
+  height: 1rem;
+  display: flex;
+}
+
+.screenshot {
+  opacity: 0;
+  transition: all 0.6s ease-out;
+}
+.screenshot.from-left { transform: translateX(-60px); }
+.screenshot.from-right { transform: translateX(60px); }
+.screenshot.visible {
+  opacity: 1;
+  transform: translateX(0);
+}

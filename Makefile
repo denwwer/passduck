@@ -1,4 +1,4 @@
-.PHONY: zip convert
+.PHONY: zip convert landing
 
 # Chrome bundle
 zip:
@@ -9,3 +9,11 @@ zip:
 # xcrun required full Xcode installation and sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
 convert:
 	@bash convert.sh
+
+# Build landing page
+landing:
+	@rm -rf ".parcel-cache" dist docs
+	@mkdir docs
+	npm run build
+	@cp -r dist/* docs/
+	@git add docs/.
