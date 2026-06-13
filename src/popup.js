@@ -22,12 +22,15 @@ const wordCountValue = document.getElementById('wordCountValue');
 const passphraseHint = document.getElementById('passphraseHint');
 
 // Sets
-const MIN_LENGTH = 10;
 const LOWERCASE = 'abcdefghijklmnopqrstuvwxyz';
 const UPPERCASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 const NUMBERS = '0123456789';
 const AMBIGUOUS = '0Oo1Il';
 const WORD_SEPARATORS = '-./+=*_';
+const GEN_MODE = {
+  pass: 'password',
+  phrase: 'passphrase',
+};
 
 // User settings
 let settings;
@@ -49,7 +52,7 @@ function getRandom(max) {
   const limit = 65536 - (65536 % max);
   let val;
 
-  for (; ;) {
+  for (;;) {
     val = crypto.getRandomValues(new Uint16Array(1))[0];
     if (val < limit) break;
   }
@@ -95,7 +98,7 @@ function updateStrength(rawBits) {
  * @param save persist the choice to storage
  */
 function switchMode(mode, save = true) {
-  const isPassword = mode === 'password';
+  const isPassword = mode === GEN_MODE.pass;
 
   modePasswordBtn.classList.toggle('active', isPassword);
   modePassphraseBtn.classList.toggle('active', !isPassword);
@@ -113,10 +116,10 @@ function switchMode(mode, save = true) {
 
   if (settings.mode !== mode) {
     settings.mode = mode;
-    if (save) chrome.storage.sync.set({settings});
+    if (save) chrome.storage.sync.set({ settings });
   }
 
-  generate();
+  generate(save);
 }
 
 /**
@@ -126,7 +129,9 @@ function switchMode(mode, save = true) {
 function generatePassphrase(slide) {
   const count = Number(wordCountInput.value);
   const words = [];
-  const list = chrome.i18n.getUILanguage().includes('de') ? WORDLISTS.de : WORDLISTS.en;
+  const list = chrome.i18n.getUILanguage().includes('de')
+    ? WORDLISTS.de
+    : WORDLISTS.en;
 
   for (let i = 0; i < count; i++) {
     let word = list[getRandom(list.length)];
@@ -147,11 +152,11 @@ function generatePassphrase(slide) {
   updateStrength(bits);
 
   // Update settings
-  if (settings.wordCount !== wordCountInput.value) {
-    settings.wordCount = wordCountInput.value;
+  if (settings.wordCount !== count) {
+    settings.wordCount = count;
 
     // Skip for slider live updates to prevent MAX_WRITE_OPERATIONS_PER_MINUTE error
-    if (!slide) chrome.storage.sync.set({settings});
+    if (!slide) chrome.storage.sync.set({ settings });
   }
 }
 
@@ -173,7 +178,6 @@ function renderOutput(text) {
   passwordOutput.replaceChildren(frag);
 }
 
-
 let blurTimer;
 
 /**
@@ -184,7 +188,9 @@ function generate(slide) {
   passwordOutput.style.filter = 'blur(0)';
   clearTimeout(blurTimer);
 
-  settings.mode === 'passphrase' ? generatePassphrase(slide) : generatePassword(slide);
+  settings.mode === GEN_MODE.pass
+    ? generatePassword(slide)
+    : generatePassphrase(slide);
 
   blurTimer = setTimeout(() => {
     passwordOutput.style.filter = 'blur(3px)';
@@ -201,7 +207,8 @@ function generatePassword(slide) {
   const length = Number(lengthInput.value);
 
   // Removes ambiguous chars
-  const clean = (set) => [...set].filter(c => !AMBIGUOUS.includes(c)).join('');
+  const clean = (set) =>
+    [...set].filter((c) => !AMBIGUOUS.includes(c)).join('');
 
   // Add char from set
   const addSet = (set) => {
@@ -219,6 +226,18 @@ function generatePassword(slide) {
     addSet(clean(customCharsInput.value));
   }
 
+  // Update setting
+  settings.lengthValue = length;
+  settings.lowercase = lowercaseCheckbox.checked;
+  settings.uppercase = uppercaseCheckbox.checked;
+  settings.numbers = numbersCheckbox.checked;
+  settings.custom = customCheckbox.checked;
+
+  // Skip for slider live updates to prevent MAX_WRITE_OPERATIONS_PER_MINUTE error
+  if (!slide) {
+    chrome.storage.sync.set({ settings });
+  }
+
   if (charset === '') {
     showNotification(chrome.i18n.getMessage('required_select'));
     return;
@@ -230,7 +249,7 @@ function generatePassword(slide) {
   let password;
   let tries = 10;
 
-  for (; ;) {
+  for (;;) {
     password = required.join('');
 
     for (let i = password.length; i < length; i++) {
@@ -241,7 +260,10 @@ function generatePassword(slide) {
     const passwordArray = password.split('');
     for (let i = passwordArray.length - 1; i > 0; i--) {
       const j = getRandom(i + 1);
-      [passwordArray[i], passwordArray[j]] = [passwordArray[j], passwordArray[i]];
+      [passwordArray[i], passwordArray[j]] = [
+        passwordArray[j],
+        passwordArray[i],
+      ];
     }
 
     password = passwordArray.join('');
@@ -252,22 +274,16 @@ function generatePassword(slide) {
 
   renderOutput(password);
   updateStrength(length * Math.log2(charset.length));
-
-  // Update settings
-  if (settings.customChars !== customCharsInput.value || settings.lengthValue !== lengthInput.value) {
-    settings.customChars = customCharsInput.value;
-    settings.lengthValue = lengthInput.value;
-
-    // Skip for slider live updates to prevent MAX_WRITE_OPERATIONS_PER_MINUTE error
-    if (!slide) chrome.storage.sync.set({settings});
-  }
 }
 
+let copyTimer;
 /**
  * Copy to clipboard
  * @return Promise<void>
  */
 async function copyToClipboard() {
+  clearTimeout(copyTimer);
+
   const password = passwordOutput.textContent;
 
   if (!password) return;
@@ -275,26 +291,30 @@ async function copyToClipboard() {
   try {
     copyBtn.disabled = true;
     await navigator.clipboard.writeText(password);
-    setTimeout(() => {
+    copyTimer = setTimeout(() => {
       copyBtn.disabled = false;
     }, 2000);
     showNotification(chrome.i18n.getMessage('copied'));
   } catch (err) {
+    copyBtn.disabled = false;
     showNotification(chrome.i18n.getMessage('copied_error'));
     console.error('Clipboard error:', err.message);
   }
 }
 
+let notifyTimer;
 /**
  * Show notification
  * @param message
  */
 function showNotification(message) {
+  clearTimeout(notifyTimer);
+
   notification.textContent = message;
   notification.classList.remove('hide');
   notification.classList.add('show');
 
-  setTimeout(() => {
+  notifyTimer = setTimeout(() => {
     notification.classList.remove('show');
     notification.classList.add('hide');
   }, 2000);
@@ -312,8 +332,8 @@ function updateSlider(input) {
 }
 
 // Event listeners
-modePasswordBtn.addEventListener('click', () => switchMode('password'));
-modePassphraseBtn.addEventListener('click', () => switchMode('passphrase'));
+modePasswordBtn.addEventListener('click', () => switchMode(GEN_MODE.pass));
+modePassphraseBtn.addEventListener('click', () => switchMode(GEN_MODE.phrase));
 generateBtn.addEventListener('click', () => generate());
 copyBtn.addEventListener('click', copyToClipboard);
 passwordOutput.addEventListener('click', () => {
@@ -327,49 +347,62 @@ passwordOutput.addEventListener('click', () => {
 lengthInput.addEventListener('input', () => {
   lengthValue.textContent = lengthInput.value;
 
-  generatePassword(true);
+  generate(true);
   updateSlider(lengthInput);
 });
 
 wordCountInput.addEventListener('input', () => {
   wordCountValue.textContent = wordCountInput.value;
 
-  generatePassphrase(true);
+  generate(true);
   updateSlider(wordCountInput);
 });
 
 // Sync settings when user releases slide
-[lengthInput, wordCountInput].forEach(slider => {
+[lengthInput, wordCountInput].forEach((slider) => {
   slider.addEventListener('change', () => {
-    chrome.storage.sync.set({settings});
+    chrome.storage.sync.set({ settings });
   });
 });
 
 customCheckbox.addEventListener('change', () => {
   customCharsInput.disabled = !customCheckbox.checked;
-  generatePassword();
+  generate(false);
 });
 
-[lowercaseCheckbox, uppercaseCheckbox, numbersCheckbox].forEach(checkbox => {
-  checkbox.addEventListener('change', () => generatePassword());
-})
+customCharsInput.addEventListener('blur', () => {
+  uniqCustomChars();
+
+  if (settings.customChars !== customCharsInput.value) {
+    settings.customChars = customCharsInput.value;
+    chrome.storage.sync.set({ settings });
+  }
+});
+
+[lowercaseCheckbox, uppercaseCheckbox, numbersCheckbox].forEach((checkbox) => {
+  checkbox.addEventListener('change', () => generate(false));
+});
 
 // Load settings and generate password
 async function init() {
   let save = false;
-  ({settings} = await chrome.storage.sync.get(['settings']));
+  ({ settings } = await chrome.storage.sync.get(['settings']));
 
   if (settings === undefined) {
     settings = {
       customChars: '-<>*()=?{}[]."~|;:_+,/', // !@#$%^& - common used (add as preset?)
-      lengthValue: 20
-    }
+      lengthValue: 20,
+    };
     save = true;
   }
 
   // Passphrase settings (defaults when upgrading)
   if (!settings.mode) {
-    settings.mode = 'password'
+    settings.lowercase = true;
+    settings.uppercase = true;
+    settings.numbers = true;
+    settings.custom = true;
+    settings.mode = GEN_MODE.pass;
     settings.wordCount = 5;
     settings.wordSeparator = WORD_SEPARATORS[getRandom(WORD_SEPARATORS.length)];
     settings.wordCapitalize = getRandom(3); // capitalize first 3 words
@@ -377,18 +410,23 @@ async function init() {
   }
 
   if (save) {
-    await chrome.storage.sync.set({settings});
+    await chrome.storage.sync.set({ settings });
   }
 
   // apply settings
+  lowercaseCheckbox.checked = settings.lowercase;
+  uppercaseCheckbox.checked = settings.uppercase;
+  numbersCheckbox.checked = settings.numbers;
+  customCheckbox.checked = settings.custom;
   customCharsInput.value = settings.customChars;
+  customCharsInput.disabled = !settings.custom;
   lengthInput.value = settings.lengthValue;
   lengthValue.textContent = settings.lengthValue;
 
   wordCountInput.value = settings.wordCount;
   wordCountValue.textContent = settings.wordCount;
 
-  // Restore last used mode (also triggers initial generate)
+  // Restore last mode and triggers initial generation
   switchMode(settings.mode, false);
   updateSlider(lengthInput);
   updateSlider(wordCountInput);
@@ -402,18 +440,27 @@ async function locale() {
   const loc = chrome.i18n.getUILanguage();
 
   if (loc.includes('es')) {
-    lowercaseCheckbox.parentNode.style = 'position: relative; margin-right: 0.2rem;';
+    lowercaseCheckbox.parentNode.style =
+      'position: relative; margin-right: 0.2rem;';
   }
   if (loc.includes('uk')) {
-    lowercaseCheckbox.parentNode.style = 'position: relative; margin-right: 0.7rem;';
+    lowercaseCheckbox.parentNode.style =
+      'position: relative; margin-right: 0.7rem;';
   }
 
-  numbersCheckbox.nextElementSibling.textContent = chrome.i18n.getMessage('numbers');
-  lowercaseCheckbox.nextElementSibling.textContent = chrome.i18n.getMessage('lowercase');
-  customCheckbox.nextElementSibling.textContent = chrome.i18n.getMessage('symbols');
-  uppercaseCheckbox.nextElementSibling.textContent = chrome.i18n.getMessage('uppercase');
+  numbersCheckbox.nextElementSibling.textContent =
+    chrome.i18n.getMessage('numbers');
+  lowercaseCheckbox.nextElementSibling.textContent =
+    chrome.i18n.getMessage('lowercase');
+  customCheckbox.nextElementSibling.textContent =
+    chrome.i18n.getMessage('symbols');
+  uppercaseCheckbox.nextElementSibling.textContent =
+    chrome.i18n.getMessage('uppercase');
 
-  customCharsInput.setAttribute('placeholder', chrome.i18n.getMessage('custom_chars'));
+  customCharsInput.setAttribute(
+    'placeholder',
+    chrome.i18n.getMessage('custom_chars'),
+  );
   generateBtn.textContent = chrome.i18n.getMessage('generate');
   copyBtn.setAttribute('title', chrome.i18n.getMessage('copy'));
 
@@ -422,7 +469,7 @@ async function locale() {
     wordHint += ' ' + chrome.i18n.getMessage('passphrase_lang_note');
   }
 
-  passphraseHint.textContent = wordHint
+  passphraseHint.textContent = wordHint;
 }
 
 // Load

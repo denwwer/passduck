@@ -1,122 +1,162 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PassDuck</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <div class="container">
-    <div class="mode-switch">
-      <button id="modePasswordBtn" class="mode-btn active" type="button" aria-label="Password">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
-          <path d="M4 9v6M1.4 10.5l5.2 3M1.4 13.5l5.2-3"></path>
-          <path d="M12 9v6M9.4 10.5l5.2 3M9.4 13.5l5.2-3"></path>
-          <path d="M20 9v6M17.4 10.5l5.2 3M17.4 13.5l5.2-3"></path>
-        </svg>
-      </button>
-      <button id="modePassphraseBtn" class="mode-btn" type="button" aria-label="Passphrase">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M4 6h16"></path>
-          <path d="M4 12h10"></path>
-          <path d="M4 18h13"></path>
-        </svg>
-      </button>
-    </div>
-
-    <div id="passwordMode" class="options-section">
-      <div class="option-group">
-        <div class="checkbox-grid">
-          <label class="checkbox-label">
-            <input type="checkbox" id="numbers" checked>
-            <span></span>
-          </label>
-
-          <label class="checkbox-label">
-            <input type="checkbox" id="lowercase" checked>
-            <span></span>
-          </label>
-
-          <label class="checkbox-label">
-            <input type="checkbox" id="custom" checked>
-            <span></span>
-          </label>
-
-          <label class="checkbox-label">
-            <input type="checkbox" id="uppercase" checked>
-            <span></span>
-          </label>
-        </div>
-
-        <input
-          type="text"
-          id="customChars"
-          class="custom-input"
-          placeholder=""
-          tabindex="-1"
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PassDuck</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="mode-switch">
+        <button
+          id="modePasswordBtn"
+          class="mode-btn active"
+          type="button"
+          aria-label="Password"
         >
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            aria-hidden="true"
+          >
+            <path d="M4 9v6M1.4 10.5l5.2 3M1.4 13.5l5.2-3"></path>
+            <path d="M12 9v6M9.4 10.5l5.2 3M9.4 13.5l5.2-3"></path>
+            <path d="M20 9v6M17.4 10.5l5.2 3M17.4 13.5l5.2-3"></path>
+          </svg>
+        </button>
+        <button
+          id="modePassphraseBtn"
+          class="mode-btn"
+          type="button"
+          aria-label="Passphrase"
+        >
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M4 6h16"></path>
+            <path d="M4 12h10"></path>
+            <path d="M4 18h13"></path>
+          </svg>
+        </button>
       </div>
 
-      <div class="slider-container">
-        <span id="lengthValue" class="length-value"></span>
-        <input
+      <div id="passwordMode" class="options-section">
+        <div class="option-group">
+          <div class="checkbox-grid">
+            <label class="checkbox-label">
+              <input type="checkbox" id="numbers" checked />
+              <span></span>
+            </label>
+
+            <label class="checkbox-label">
+              <input type="checkbox" id="lowercase" checked />
+              <span></span>
+            </label>
+
+            <label class="checkbox-label">
+              <input type="checkbox" id="custom" checked />
+              <span></span>
+            </label>
+
+            <label class="checkbox-label">
+              <input type="checkbox" id="uppercase" checked />
+              <span></span>
+            </label>
+          </div>
+
+          <input
+            type="text"
+            id="customChars"
+            class="custom-input"
+            placeholder=""
+            tabindex="-1"
+          />
+        </div>
+
+        <div class="slider-container">
+          <span id="lengthValue" class="length-value"></span>
+          <input
             type="range"
             id="length"
             min="10"
             max="128"
             value="20"
             class="length-slider"
-        >
+          />
+        </div>
       </div>
-    </div>
 
-    <div id="passphraseMode" class="options-section" hidden>
-      <p id="passphraseHint" class="hint" hidden></p>
+      <div id="passphraseMode" class="options-section" hidden>
+        <p id="passphraseHint" class="hint" hidden></p>
 
-      <div class="slider-container">
-        <span id="wordCountValue" class="length-value"></span>
-        <input
+        <div class="slider-container">
+          <span id="wordCountValue" class="length-value"></span>
+          <input
             type="range"
             id="wordCount"
             min="3"
             max="10"
             value="5"
             class="length-slider"
-        >
+          />
+        </div>
       </div>
+
+      <div class="action-row">
+        <button id="generateBtn" class="generate-btn"></button>
+
+        <button id="copyBtn" class="copy-btn" title="">
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path
+              d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
+            ></path>
+          </svg>
+        </button>
+      </div>
+
+      <div class="output-section">
+        <div
+          id="passwordOutput"
+          class="password-output"
+          tabindex="-1"
+          role="textbox"
+          aria-readonly="true"
+        ></div>
+      </div>
+
+      <div class="strength-meter">
+        <div class="strength-bar">
+          <div id="strengthFill" class="strength-fill"></div>
+        </div>
+        <span id="strengthLabel" class="strength-label"></span>
+      </div>
+
+      <div id="notification" class="notification"></div>
     </div>
 
-    <div class="action-row">
-      <button id="generateBtn" class="generate-btn"></button>
-
-      <button id="copyBtn" class="copy-btn" title="">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-        </svg>
-      </button>
-    </div>
-
-    <div class="output-section">
-      <div
-        id="passwordOutput"
-        class="password-output"
-        tabindex="-1"
-        role="textbox"
-        aria-readonly="true"
-      ></div>
-    </div>
-
-    <div class="strength-meter">
-      <div class="strength-bar"><div id="strengthFill" class="strength-fill"></div></div>
-      <span id="strengthLabel" class="strength-label"></span>
-    </div>
-
-    <div id="notification" class="notification"></div>
-  </div>
-
-  <script src="wordlist.js"></script>
-  <script src="popup.js"></script>
-</body>
+    <script src="wordlist.js"></script>
+    <script src="popup.js"></script>
+  </body>
 </html>

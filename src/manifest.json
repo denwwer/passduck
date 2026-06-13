@@ -17,8 +17,5 @@
     "48": "48.png",
     "128": "128.png"
   },
-  "permissions": [
-    "clipboardWrite",
-    "storage"
-  ]
+  "permissions": ["clipboardWrite", "storage"]
 }
