@@ -3,7 +3,7 @@
     "message": "PassDuck - generatore di password sicure"
   },
   "description": {
-    "message": "Un'estensione leggera per generare immediatamente password forti e sicure"
+    "message": "Un'estensione leggera per generare immediatamente password forti e sicure."
   },
   "numbers": {
     "message": "Numeri"
@@ -33,9 +33,27 @@
     "message": "Errore negli appunti"
   },
   "required_select": {
-    "message": "Seleziona almeno un'opzione"
+    "message": "Seleziona almeno un'opzione."
   },
-  "required_length": {
-    "message": "La lunghezza deve essere compresa tra 8 e 128"
+  "show_password": {
+    "message": "Mostra password"
+  },
+  "strength_weak": {
+    "message": "Debole"
+  },
+  "strength_fair": {
+    "message": "Discreta"
+  },
+  "strength_strong": {
+    "message": "Forte"
+  },
+  "strength_very_strong": {
+    "message": "Molto forte"
+  },
+  "passphrase_hint": {
+    "message": "Per renderla più facile da ricordare, immagina gli elementi della tua password in una storia o immagine mentale."
+  },
+  "passphrase_lang_note": {
+    "message": "Le parole sono in inglese per la massima compatibilità."
   }
 }

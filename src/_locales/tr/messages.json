@@ -3,7 +3,7 @@
     "message": "PassDuck - güvenli şifre oluşturucu"
   },
   "description": {
-    "message": "Güçlü ve güvenli şifreleri anında oluşturmak için hafif bir uzantı"
+    "message": "Güçlü ve güvenli şifreleri anında oluşturmak için hafif bir uzantı."
   },
   "numbers": {
     "message": "Sayılar"
@@ -33,9 +33,27 @@
     "message": "Pano hatası"
   },
   "required_select": {
-    "message": "Lütfen en az bir seçenek seçin"
+    "message": "Lütfen en az bir seçenek seçin."
   },
-  "required_length": {
-    "message": "Uzunluk 8 ile 128 arasında olmalıdır"
+  "show_password": {
+    "message": "Şifreyi göster"
+  },
+  "strength_weak": {
+    "message": "Zayıf"
+  },
+  "strength_fair": {
+    "message": "Orta"
+  },
+  "strength_strong": {
+    "message": "Güçlü"
+  },
+  "strength_very_strong": {
+    "message": "Çok güçlü"
+  },
+  "passphrase_hint": {
+    "message": "Daha kolay hatırlamak için, parolanızın öğelerini bir hikâye veya zihinsel görüntü içinde hayal edin."
+  },
+  "passphrase_lang_note": {
+    "message": "Maksimum uyumluluk için kelimeler İngilizcedir."
   }
 }

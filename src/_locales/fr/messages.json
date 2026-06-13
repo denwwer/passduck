@@ -3,7 +3,7 @@
     "message": "PassDuck – Générateur de mots de passe"
   },
   "description": {
-    "message": "Une extension légère pour générer instantanément des mots de passe forts et sécurisés"
+    "message": "Une extension légère pour générer instantanément des mots de passe forts et sécurisés."
   },
   "numbers": {
     "message": "Chiffres"
@@ -33,9 +33,27 @@
     "message": "Erreur du presse-papiers"
   },
   "required_select": {
-    "message": "Veuillez sélectionner au moins une option"
+    "message": "Veuillez sélectionner au moins une option."
   },
-  "required_length": {
-    "message": "La longueur doit être comprise entre 8 et 128"
+  "show_password": {
+    "message": "Afficher le mot de passe"
+  },
+  "strength_weak": {
+    "message": "Faible"
+  },
+  "strength_fair": {
+    "message": "Correct"
+  },
+  "strength_strong": {
+    "message": "Fort"
+  },
+  "strength_very_strong": {
+    "message": "Très fort"
+  },
+  "passphrase_hint": {
+    "message": "Pour la rendre plus facile à mémoriser, imaginez les éléments de votre mot de passe dans une histoire ou une image mentale."
+  },
+  "passphrase_lang_note": {
+    "message": "Les mots sont en anglais pour une compatibilité maximale."
   }
 }
