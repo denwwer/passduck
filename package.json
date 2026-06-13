@@ -7,14 +7,23 @@
   },
   "license": "MIT",
   "scripts": {
-    "start": "parcel serve landing/index.html --public-url /",
+    "landing": "parcel serve landing/index.html --public-url /",
+    "landing-build": "parcel build landing/index.html --no-source-maps --public-url /passduck/",
+    "pwa": "parcel serve pwa/index.html --public-url /",
     "test": "exit 1",
-    "build": "parcel build landing/index.html --no-source-maps --public-url /passduck/"
+    "lint": "eslint . --fix",
+    "format": "prettier . --write"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@parcel/packager-raw-url": "^2.16.3",
+    "@parcel/transformer-webmanifest": "^2.16.3",
     "@tailwindcss/postcss": "^4.1.18",
+    "eslint": "^10.5.0",
+    "eslint-config-prettier": "^10.1.8",
+    "globals": "^17.6.0",
     "parcel": "^2.16.3",
+    "prettier": "^3.8.4",
     "tailwindcss": "^4.1.18"
   }
 }
