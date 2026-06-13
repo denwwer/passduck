@@ -9,9 +9,11 @@
 dist
 node_modules
 
+.parcel-cache
 .history/
 *.vsix
 
+popup.bundle.js
 passduck.zip
 safari
 PassDuck*

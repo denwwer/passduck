@@ -5,7 +5,7 @@ zip:
 	@rm -rf passduck.zip
 	@cd src && zip -r ../passduck.zip .
 
-# Convert to Safari
+# Convert to Safari bundle
 # xcrun required full Xcode installation and sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
 convert:
 	@bash convert.sh
@@ -14,6 +14,6 @@ convert:
 landing:
 	@rm -rf ".parcel-cache" dist docs
 	@mkdir docs
-	npm run build
+	npm run landing-build
 	@cp -r dist/* docs/
 	@git add docs/.

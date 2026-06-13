@@ -1,5 +1,4 @@
-@import "tailwindcss";
-
+@import 'tailwindcss';
 
 :root {
   --bg-primary: #ffffff;
@@ -17,7 +16,20 @@
 }
 
 body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', Arial, sans-serif;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    'Fira Sans',
+    'Droid Sans',
+    'Helvetica Neue',
+    Arial,
+    sans-serif;
   background-color: var(--bg-primary);
   color: var(--text-primary);
 }
@@ -49,10 +61,12 @@ body {
 
 .button {
   text-align: center;
-  border-radius: .6rem;
-  padding: .5rem 1rem;
+  border-radius: 0.6rem;
+  padding: 0.5rem 1rem;
   font-weight: 500;
-  transition: box-shadow .2s, background-color .2s;
+  transition:
+    box-shadow 0.2s,
+    background-color 0.2s;
 }
 
 .button:hover {
@@ -71,8 +85,8 @@ body {
 }
 
 .button.btn-icon {
-  grid-column-gap: .75rem;
-  grid-row-gap: .75rem;
+  grid-column-gap: 0.75rem;
+  grid-row-gap: 0.75rem;
   flex-direction: row;
   justify-content: center;
   align-items: center;
@@ -95,9 +109,53 @@ body {
   opacity: 0;
   transition: all 0.6s ease-out;
 }
-.screenshot.from-left { transform: translateX(-60px); }
-.screenshot.from-right { transform: translateX(60px); }
+
+.screenshot.from-left {
+  transform: translateX(-60px);
+}
+
+.screenshot.from-right {
+  transform: translateX(60px);
+}
+
 .screenshot.visible {
   opacity: 1;
   transform: translateX(0);
+}
+
+section {
+  position: relative;
+  overflow: hidden;
+}
+
+section::before {
+  position: absolute;
+  font-size: 100px;
+  font-weight: bold;
+  opacity: 0.05;
+  top: 50%;
+  left: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+section ul {
+  position: relative;
+  z-index: 1;
+}
+
+.section-1::before {
+  content: 'SECURE';
+  transform: translate(-4%, -97%);
+}
+
+.section-2::before {
+  color: var(--bg-secondary);
+  content: 'PASSPHRASES';
+  transform: translate(-100%, -86%);
+}
+
+.section-3::before {
+  content: 'CUSTOMIZE';
+  transform: translate(-20%, -86%);
 }
