@@ -5,14 +5,18 @@
 }
 
 :root {
-  --bg-primary: #ffffff;
+  --bg-primary: rgba(255, 255, 255, 0.91);
   --bg-secondary: #f5f5f5;
   --bg-input: #ffffff;
   --text-primary: #1a1a1a;
   --text-secondary: #666666;
   --border-color: #d1d5db;
   --accent-color: #ef233c;
-  --accent-hover: #029f96;
+  --accent-hover: #d91e35;
+  /*--num-color: #0891b2;  --sym-color: #c026d3;*/
+  /*--num-color: #0d9488;  --sym-color: #7c3aed;*/
+  --num-color: #2563eb;
+  --sym-color: #d97706;
   --shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   --shadow-lg: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
@@ -24,6 +28,8 @@ body.dark {
   --text-primary: #e5e5e5;
   --text-secondary: #a0a0a0;
   --border-color: #404040;
+  --num-color: #60a5fa;
+  --sym-color: #fbbf24;
   --shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
   --shadow-lg: 0 4px 6px rgba(0, 0, 0, 0.4);
 }
@@ -36,6 +42,8 @@ body.dark {
     --text-primary: #e5e5e5;
     --text-secondary: #a0a0a0;
     --border-color: #404040;
+    --num-color: #60a5fa;
+    --sym-color: #fbbf24;
     --shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
     --shadow-lg: 0 4px 6px rgba(0, 0, 0, 0.4);
   }
@@ -52,10 +60,100 @@ body {
   color: var(--text-primary);
   width: 300px;
   font-size: 13px;
+  overflow-x: hidden;
 }
 
 .container {
   padding: 30px 15px;
+}
+
+.mode-switch {
+  position: relative;
+  display: flex;
+  gap: 3px;
+  padding: 2px;
+  margin-bottom: 20px;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+}
+
+/* Sliding thumb behind the active tab */
+.mode-switch::before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  bottom: 2px;
+  left: 2px;
+  width: calc(50% - 3.5px);
+  border-radius: 6px;
+  background-color: var(--bg-input);
+  box-shadow: var(--shadow);
+  transition: transform 0.25s ease;
+}
+
+.mode-switch:has(#modePassphraseBtn.active)::before {
+  transform: translateX(calc(100% + 3px));
+}
+
+.mode-btn {
+  flex: 1;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3px 2px;
+  border: none;
+  border-radius: 6px;
+  background-color: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.mode-btn:hover {
+  color: var(--text-primary);
+}
+
+.mode-btn.active {
+  color: var(--accent-color);
+}
+
+.mode-btn svg {
+  display: block;
+  flex-shrink: 0;
+}
+
+/* Mode views slide in from the side of the selected tab */
+.slide-in-left {
+  animation: slideInLeft 0.25s ease;
+}
+
+.slide-in-right {
+  animation: slideInRight 0.25s ease;
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .options-section {
@@ -66,7 +164,6 @@ body {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  margin-bottom: 20px;
 }
 
 .checkbox-grid {
@@ -80,7 +177,8 @@ body {
 }
 
 .checkbox-label {
-  display: flex;
+  display: inline-flex;
+  width: fit-content;
   align-items: center;
   gap: 10px;
   cursor: pointer;
@@ -105,7 +203,7 @@ body {
   border: 1px solid var(--border-color);
   border-radius: 6px;
   background-color: var(--bg-input);
-  color: var(--text-primary);
+  color: var(--text-secondary);
   transition: border-color 0.2s, box-shadow 0.2s;
   margin-top: 4px;
 }
@@ -114,18 +212,19 @@ body {
   opacity: 0.5;
   cursor: not-allowed;
   background-color: var(--bg-secondary);
-  color: var(--text-secondary);
+  color: var(--border-color);
   border-color: var(--border-color);
 }
 
 .custom-input:focus {
   outline: none;
+  color: var(--text-primary);
   border-color: var(--accent-color);
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
 .length-value {
-  width: 2rem;
+  width: 2.2rem;
   font-weight: 600;
   color: var(--accent-color);
   font-size: 15px;
@@ -147,8 +246,14 @@ body {
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
+.action-row {
+  display: flex;
+  gap: 8px;
+  align-items: stretch;
+}
+
 .generate-btn {
-  width: 100%;
+  flex: 1;
   padding: 12px;
   background-color: var(--accent-color);
   color: white;
@@ -170,10 +275,11 @@ body {
 }
 
 .output-section {
-  margin-top: 16px;
+  margin: 16px 0;
   display: flex;
   gap: 8px;
-  align-items: center;
+  align-items: flex-start;
+  position: relative;
 }
 
 .password-output {
@@ -182,15 +288,95 @@ body {
   border: 1px solid var(--border-color);
   border-radius: 6px;
   font-size: 14px;
-  font-family: 'Courier New', monospace;
+  font-family: ui-monospace, 'SF Mono', 'Cascadia Mono', 'Segoe UI Mono', 'Roboto Mono', Menlo, Consolas, monospace;
   background-color: var(--bg-input);
   color: var(--text-primary);
   transition: border-color 0.2s;
+  /* Wrap long passphrases/passwords; div grows with content */
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  line-height: 1.4;
+}
+
+.password-output .ch-num {
+  color: var(--num-color);
+}
+
+.password-output .ch-sym {
+  color: var(--sym-color);
 }
 
 .password-output:focus {
   outline: none;
   border-color: var(--accent-color);
+}
+
+.password-output:hover {
+  filter: blur(0) !important;
+}
+
+.strength-meter {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.strength-bar {
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  background-color: var(--border-color);
+  overflow: hidden;
+}
+
+.strength-fill {
+  width: 0;
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.2s, background-color 0.2s;
+}
+
+.strength-fill.weak {
+  background-color: #ef233c;
+}
+
+.strength-fill.fair {
+  background-color: #f59e0b;
+}
+
+.strength-fill.strong {
+  background-color: #10b981;
+}
+
+.strength-fill.very-strong {
+  background-color: #059669;
+}
+
+.strength-label {
+  font-size: 12px;
+  font-weight: 400;
+  white-space: nowrap;
+  color: var(--text-secondary);
+}
+
+.hint {
+  cursor: default;
+  display: flex;
+  gap: 5px;
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--text-secondary);
+}
+
+/* keep the hidden attribute working despite display: flex */
+.hint[hidden] {
+  display: none;
+}
+
+.hint:before {
+  content: 'ⓘ';
+  flex-shrink: 0;
 }
 
 .copy-btn {
@@ -228,7 +414,10 @@ body {
   position: fixed;
   bottom: 0;
   left: 50%;
-  transform: translateX(-50%);
+  /* Resting hidden state — no animation on load */
+  transform: translateX(-50%) translateY(10px);
+  opacity: 0;
+  pointer-events: none;
   background-color: var(--accent-hover);
   font-weight: normal;
   text-align: center;
@@ -236,11 +425,14 @@ body {
   padding: 5px 15px;
   font-size: 13px;
   box-shadow: var(--shadow-lg);
-  animation: slideUp 0.3s ease-out;
   z-index: 1000;
 }
 
-.notification.hidden {
+.notification.show {
+  animation: slideUp 0.3s ease-out forwards;
+}
+
+.notification.hide {
   animation: slideDown 0.3s ease-out forwards;
 }
 
@@ -269,7 +461,7 @@ body {
 .slider-container {
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
+  margin: 20px 0;
 }
 
 .length-slider {
