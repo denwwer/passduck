@@ -182,15 +182,13 @@ body {
 
 .checkbox-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr; /* 2 equal columns */
+  grid-template-columns: max-content max-content;
+  justify-content: space-between;
   gap: 12px 16px; /* 12px row gap, 16px column gap */
 }
 
-.checkbox-grid > :nth-child(even) {
-  justify-self: end;
-}
-
 .checkbox-label {
+  position: relative;
   display: inline-flex;
   width: fit-content;
   align-items: center;
@@ -201,14 +199,46 @@ body {
 }
 
 .checkbox-label input[type='checkbox'] {
-  width: 15px;
+  display: none;
+}
+
+/* track */
+.checkbox-label::before {
+  content: '';
+  display: block;
+  flex-shrink: 0;
+  width: 26px;
   height: 15px;
-  cursor: pointer;
-  accent-color: var(--accent-color);
+  border-radius: 500px;
+  background-color: var(--border-color);
+  transition: background-color 0.15s ease-out;
+}
+
+/* knob */
+.checkbox-label::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 1px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background-color: #fff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  transform: translate(0, -50%);
+  transition: transform 0.15s ease-out;
+}
+
+.checkbox-label:has(input[type='checkbox']:checked)::before {
+  background-color: var(--accent-color);
+}
+
+.checkbox-label:has(input[type='checkbox']:checked)::after {
+  transform: translate(11px, -50%);
 }
 
 .checkbox-label:has(input[type='checkbox']:not(:checked)) {
-  opacity: 0.5;
+  color: var(--text-secondary);
 }
 
 .custom-input {
@@ -335,6 +365,7 @@ body {
 }
 
 .strength-meter {
+  cursor: default;
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -395,6 +426,7 @@ body {
 }
 
 .hint:before {
+  font-weight: 500;
   content: 'ⓘ';
   flex-shrink: 0;
 }

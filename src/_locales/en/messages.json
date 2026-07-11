@@ -1,9 +1,9 @@
 {
   "name": {
-    "message": "PassDuck - secure password generator"
+    "message": "Secure password generator"
   },
   "description": {
-    "message": "A lightweight extension for instantly generating strong, secure passwords."
+    "message": "PassDuck - lightweight extension for instantly generating strong, secure passwords and passphrase."
   },
   "numbers": {
     "message": "Numbers"
