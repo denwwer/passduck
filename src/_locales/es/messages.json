@@ -1,6 +1,6 @@
 {
   "name": {
-    "message": "PassDuck - generador de contraseñas seguras"
+    "message": "Generador seguro de contraseñas"
   },
   "description": {
     "message": "Una extensión ligera para generar al instante contraseñas fuertes y seguras."

@@ -129,7 +129,7 @@ function switchMode(mode, save = true) {
 function generatePassphrase(slide) {
   const count = Number(wordCountInput.value);
   const words = [];
-  const list = chrome.i18n.getUILanguage().includes('de')
+  const list = getLocale().includes('de')
     ? WORDLISTS.de
     : WORDLISTS.en;
 
@@ -432,21 +432,20 @@ async function init() {
   updateSlider(wordCountInput);
 }
 
+
+/**
+ * Wrapper to easy change locale.
+ * Set in src/manifest.json:6 (default_locale) target lang and rename "en" _locales as "_en"
+ * @return string
+ */
+function getLocale() {
+  // return 'de';
+  return chrome.i18n.getUILanguage();
+}
+
 // Set localized labels
 async function locale() {
-  // adjust labels positions for locale
-  // to test locale set in src/manifest.json:6 (default_locale) target lang and rename "en" _locales as "_en"
-  // const loc = 'de';
-  const loc = chrome.i18n.getUILanguage();
-
-  if (loc.includes('es')) {
-    lowercaseCheckbox.parentNode.style =
-      'position: relative; margin-right: 0.2rem;';
-  }
-  if (loc.includes('uk')) {
-    lowercaseCheckbox.parentNode.style =
-      'position: relative; margin-right: 0.7rem;';
-  }
+  const loc = getLocale()
 
   numbersCheckbox.nextElementSibling.textContent =
     chrome.i18n.getMessage('numbers');
