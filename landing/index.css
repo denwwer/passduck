@@ -56,6 +56,10 @@ body {
 }
 
 .text-dark {
+  color: var(--bg-dark);
+}
+
+.text-bg-dark {
   color: var(--text-dark);
 }
 
@@ -142,20 +146,34 @@ section::before {
 section ul {
   position: relative;
   z-index: 1;
+  list-style: none;
+  padding: 0;
+}
+
+section li {
+  padding-left: 1.35rem;
+  position: relative;
+}
+
+section li::before {
+  content: '›';
+  position: absolute;
+  left: 0;
+  color: var(--accent-color);
 }
 
 .section-1::before {
   content: 'SECURE';
-  transform: translate(-4%, -97%);
+  transform: translate(0, -99%);
 }
 
 .section-2::before {
   color: var(--bg-secondary);
   content: 'PASSPHRASES';
-  transform: translate(-100%, -86%);
+  transform: translate(-98%, -99%);
 }
 
 .section-3::before {
   content: 'CUSTOMIZE';
-  transform: translate(-20%, -86%);
+  transform: translate(-20%, -99%);
 }

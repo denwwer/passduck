@@ -1,11 +1,11 @@
-<!DOCTYPE html><html lang=en><meta charset=UTF-8><meta name=viewport content="width=device-width, initial-scale=1.0"><meta name=keywords content="password generator, browser extension, online security, privacy tools"><title>PassDuck</title><link rel=icon type=image/png sizes=96x96 href=/passduck/logo.d0e6ea66.png><link href=/passduck/landing.861bc158.css rel=stylesheet><script>function isSafari(){return/^((?!chrome|chromium|android).)*safari/i.test(navigator.userAgent)}function isChromium(){return!!window.chrome&&/chrome|chromium|crios/i.test(navigator.userAgent)}document.addEventListener("DOMContentLoaded",()=>{document.getElementById("year").innerText=new Date().getFullYear().toString(),isChromium()?document.getElementById("browser-1").hidden=!1:isSafari()&&(document.getElementById("browser-2").hidden=!1),document.getElementById("source").hidden=!1});</script><body>
+<!DOCTYPE html><html lang=en><meta charset=UTF-8><meta name=viewport content="width=device-width, initial-scale=1.0"><meta name=keywords content="password generator, browser extension, online security, privacy tools"><title>PassDuck</title><link rel=icon type=image/png sizes=96x96 href=/passduck/logo.d0e6ea66.png><link href=/passduck/landing.43598116.css rel=stylesheet><script>function isSafari(){return/^((?!chrome|chromium|android).)*safari/i.test(navigator.userAgent)}function isChromium(){return!!window.chrome&&/chrome|chromium|crios/i.test(navigator.userAgent)}document.addEventListener("DOMContentLoaded",()=>{document.getElementById("year").innerText=new Date().getFullYear().toString(),isChromium()?document.getElementById("browser-1").hidden=!1:isSafari()&&(document.getElementById("browser-2").hidden=!1),document.getElementById("source").hidden=!1});</script><body>
     <header class="border-b border-primary px-6 py-10 text-center">
       <h1 class=title>
         <span class=inline>
-          <img id=duck class="cursor-pointer relative top-2" src=/passduck/logo.d0e6ea66.png width=32 height=32 alt=PassDuck>PassDuck
+          <img id=duck class="cursor-pointer left-0.5 relative top-2" src=/passduck/logo.d0e6ea66.png width=24 height=24 alt=PassDuck><span class=text-dark>Pass</span>Duck
         </span>
       </h1>
-      <p class="font-light max-w-md mt-4 mx-auto text-secondary">
+      <p class="font-light leading-relaxed max-w-md mt-4 mx-auto text-secondary">
         A lightweight extension for instantly generating strong, <br>
         secure passwords.
       </p>
@@ -51,17 +51,24 @@
           <div>Open Source</div>
         </a>
       </div>
+
+      <p class="mt-4 text-secondary text-xs">
+        Also available for
+        <a href="https://apps.apple.com/app/passduck-password-generator/id6756817549?mt=12"><span class="underline underline-offset-2">Safari</span></a>
+        on macOS and
+        <a class="underline underline-offset-2" href=https://chromewebstore.google.com/detail/nenogephcifkngdiakjgojpjdhekhkpj>Chrome, Brave</a>.
+      </p>
     </header>
 
     
     <section class="border-b border-primary px-6 py-16 section-1">
       <div class="gap-10 grid items-center max-w-5xl md:grid-cols-2 mx-auto">
         <div class="from-left screenshot">
-          <img src=/passduck/s-1.4f93400f.png width=400 height=400>
+          <img src=/passduck/s-1.2d182222.png width=320 height=320>
         </div>
         <div class="md:text-left text-center">
           <ul class=list-disc>
-            <li class="border-b-2 border-b-red-600 inline-flex py-1">
+            <li class=py-1>
               Cryptographically secure random generation.
             </li>
             <li class=py-1>Real-time entropy meter.</li>
@@ -77,19 +84,20 @@
     
     <section class="bg-dark border-b border-primary px-6 py-16 section-2">
       <div class="gap-10 grid items-center max-w-5xl md:grid-cols-2 mx-auto">
-        <div class="md:order-1 md:text-left order-2 text-center text-dark">
+        <div class="md:order-1 md:text-left order-2 text-bg-dark text-center">
           <ul class=list-disc>
-            <li class="border-b-2 border-b-amber-600 inline-flex py-1">
+            <li class=py-1>
               Generate passphrases from curated word lists.
             </li>
             <li class=py-1>Adjustable word count for your security needs.</li>
             <li class=py-1>
               Words in English or German for universal compatibility.
             </li>
+            <li class=py-1>Multilingual localization.</li>
           </ul>
         </div>
         <div class="from-right md:order-2 order-1 screenshot">
-          <img src=/passduck/s-2.7c5a4d0a.png width=400 height=400>
+          <img src=/passduck/s-2.058fafd7.png width=320 height=320>
         </div>
       </div>
     </section>
@@ -98,17 +106,18 @@
     <section class="border-b border-primary px-6 py-16 section-3">
       <div class="gap-10 grid items-center max-w-5xl md:grid-cols-2 mx-auto">
         <div class="from-left screenshot">
-          <img src=/passduck/s-3.0cd3a07e.png width=400 height=400>
+          <img src=/passduck/s-3.6a2cb0a3.png width=320 height=320>
         </div>
         <div class="md:text-left text-center">
           <ul class=list-disc>
-            <li class="border-b-2 border-b-purple-600 inline-flex py-1">
+            <li class=py-1>
               Customize your preferred character set.
             </li>
             <li class=py-1>Adjust password length.</li>
+            <li class=py-1>Persisted states in settings.</li>
             <li class=py-1>
               Dark theme support
-              <span class=text-sm>(based on system preference)</span>.
+              <span class=text-sm>(based on OS preference)</span>.
             </li>
           </ul>
         </div>

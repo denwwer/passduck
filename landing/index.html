@@ -45,15 +45,15 @@
         <span class="inline">
           <img
             id="duck"
-            class="relative top-2 cursor-pointer"
+            class="relative top-2 left-0.5 cursor-pointer"
             src="logo.png"
-            width="32"
-            height="32"
+            width="24"
+            height="24"
             alt="PassDuck"
-          />PassDuck
+          /><span class="text-dark">Pass</span>Duck
         </span>
       </h1>
-      <p class="mt-4 text-secondary max-w-md mx-auto font-light">
+      <p class="mt-4 text-secondary max-w-md mx-auto font-light leading-relaxed">
         A lightweight extension for instantly generating strong, <br />
         secure passwords.
       </p>
@@ -144,17 +144,31 @@
           <div>Open Source</div>
         </a>
       </div>
+
+      <p class="mt-4 text-secondary text-xs">
+        Also available for
+        <a
+          href="https://apps.apple.com/app/passduck-password-generator/id6756817549?mt=12"
+        ><span class="underline underline-offset-2">Safari</span></a
+        >
+        on macOS and
+        <a
+          class="underline underline-offset-2"
+          href="https://chromewebstore.google.com/detail/nenogephcifkngdiakjgojpjdhekhkpj"
+          >Chrome, Brave</a
+        >.
+      </p>
     </header>
 
     <!-- Section 1 -->
     <section class="py-16 px-6 border-b border-primary section-1">
       <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-10 items-center">
         <div class="screenshot from-left">
-          <img src="s-1.png" width="400" height="400" />
+          <img src="s-1.png" width="320" height="320" />
         </div>
         <div class="text-center md:text-left">
           <ul class="list-disc">
-            <li class="py-1 border-b-2 border-b-red-600 inline-flex">
+            <li class="py-1">
               Cryptographically secure random generation.
             </li>
             <li class="py-1">Real-time entropy meter.</li>
@@ -170,19 +184,20 @@
     <!-- Section 2 -->
     <section class="py-16 px-6 bg-dark border-b border-primary section-2">
       <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-10 items-center">
-        <div class="text-center text-dark md:text-left order-2 md:order-1">
+        <div class="text-center text-bg-dark md:text-left order-2 md:order-1">
           <ul class="list-disc">
-            <li class="py-1 border-b-2 border-b-amber-600 inline-flex">
+            <li class="py-1">
               Generate passphrases from curated word lists.
             </li>
             <li class="py-1">Adjustable word count for your security needs.</li>
             <li class="py-1">
               Words in English or German for universal compatibility.
             </li>
+            <li class="py-1">Multilingual localization.</li>
           </ul>
         </div>
         <div class="screenshot from-right order-1 md:order-2">
-          <img src="s-2.png" width="400" height="400" />
+          <img src="s-2.png" width="320" height="320" />
         </div>
       </div>
     </section>
@@ -191,17 +206,18 @@
     <section class="py-16 px-6 border-b border-primary section-3">
       <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-10 items-center">
         <div class="screenshot from-left">
-          <img src="s-3.png" width="400" height="400" />
+          <img src="s-3.png" width="320" height="320" />
         </div>
         <div class="text-center md:text-left">
           <ul class="list-disc">
-            <li class="py-1 border-b-2 border-b-purple-600 inline-flex">
+            <li class="py-1">
               Customize your preferred character set.
             </li>
             <li class="py-1">Adjust password length.</li>
+            <li class="py-1">Persisted states in settings.</li>
             <li class="py-1">
               Dark theme support
-              <span class="text-sm">(based on system preference)</span>.
+              <span class="text-sm">(based on OS preference)</span>.
             </li>
           </ul>
         </div>
