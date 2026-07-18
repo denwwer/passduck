@@ -63,6 +63,14 @@ body {
   color: var(--text-dark);
 }
 
+.marker {
+  font-weight: 600;
+  color: var(--text-dark);
+  background: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-9&color=ef233c);
+  margin: -4px -5px;
+  padding:  4px  5px;
+}
+
 .button {
   text-align: center;
   border-radius: 0.4rem;
@@ -74,7 +82,6 @@ body {
 }
 
 .button:hover {
-  /*background-color: #474747;*/
   box-shadow: 0 9px 17px #0000001f;
 }
 
@@ -132,17 +139,6 @@ section {
   overflow: hidden;
 }
 
-section::before {
-  position: absolute;
-  font-size: 100px;
-  font-weight: bold;
-  opacity: 0.05;
-  top: 50%;
-  left: 50%;
-  pointer-events: none;
-  z-index: 0;
-}
-
 section ul {
   position: relative;
   z-index: 1;
@@ -160,20 +156,4 @@ section li::before {
   position: absolute;
   left: 0;
   color: var(--accent-color);
-}
-
-.section-1::before {
-  content: 'SECURE';
-  transform: translate(0, -99%);
-}
-
-.section-2::before {
-  color: var(--bg-secondary);
-  content: 'PASSPHRASES';
-  transform: translate(-98%, -99%);
-}
-
-.section-3::before {
-  content: 'CUSTOMIZE';
-  transform: translate(-20%, -99%);
 }
