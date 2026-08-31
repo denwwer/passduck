@@ -14,6 +14,6 @@ convert:
 landing:
 	@rm -rf ".parcel-cache" dist docs
 	@mkdir docs
-	npm run landing-build
+	npm run landing:build
 	@cp -r dist/* docs/
 	@git add docs/.

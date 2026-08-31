@@ -1,14 +1,20 @@
-<!DOCTYPE html><html lang=en><meta charset=UTF-8><meta name=viewport content="width=device-width, initial-scale=1.0"><meta name=keywords content="password generator, browser extension, online security, privacy tools"><title>PassDuck</title><link rel=icon type=image/png sizes=96x96 href=/passduck/logo.d0e6ea66.png><link href=/passduck/landing.a2f73efc.css rel=stylesheet><script>function isSafari(){return/^((?!chrome|chromium|android).)*safari/i.test(navigator.userAgent)}function isChromium(){return!!window.chrome&&/chrome|chromium|crios/i.test(navigator.userAgent)}document.addEventListener("DOMContentLoaded",()=>{document.getElementById("year").innerText=new Date().getFullYear().toString(),isChromium()?document.getElementById("browser-1").hidden=!1:isSafari()&&(document.getElementById("browser-2").hidden=!1),document.getElementById("source").hidden=!1});</script><body>
+<!DOCTYPE html><html lang=en><meta charset=UTF-8><meta name=viewport content="width=device-width, initial-scale=1.0"><title>
+      PassDuck - Free Secure Password &amp; Passphrase Generator Extension
+    </title><meta name=description content="PassDuck is a free, privacy-first browser extension that generates strong random passwords and passphrases offline. Cryptographically secure, no tracking, no page access. Available for Chrome, Brave, Edge and Safari."><meta name=keywords content="password generator, passphrase generator, random password, browser extension, chrome extension, safari extension, online security, privacy tools"><meta name=robots content="index, follow, max-image-preview:large"><meta name=color-scheme content="light dark"><meta name=theme-color content=#ffffff media="(prefers-color-scheme: light)"><meta name=theme-color content=#1e1e1e media="(prefers-color-scheme: dark)"><link rel=canonical href=https://denwwer.github.io/passduck/><link rel=icon type=image/png sizes=96x96 href=/passduck/logo.d0e6ea66.png><link rel=apple-touch-icon href=/passduck/logo.d0e6ea66.png><link href=/passduck/landing.8d9f23a9.css rel=stylesheet><script type=application/ld+json>{"@context":"https://schema.org","@graph":[{"@type":"SoftwareApplication","applicationCategory":"SecurityApplication","browserRequirements":"Requires Chromium 88+ or Safari 15+","description":"Privacy-first browser extension that generates strong random passwords and passphrases entirely on your device.","downloadUrl":"https://chromewebstore.google.com/detail/nenogephcifkngdiakjgojpjdhekhkpj","featureList":["Cryptographically secure random password generation","Real-time entropy meter","Passphrase generation from curated word lists","Customizable character sets and length","Local processing with no page access","Dark theme support"],"isAccessibleForFree":true,"license":"https://opensource.org/licenses/MIT","name":"PassDuck","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"operatingSystem":"Chrome, Brave, Edge, Safari, macOS, iOS","sameAs":["https://github.com/denwwer/passduck","https://apps.apple.com/app/passduck-password-generator/id6756817549"],"softwareVersion":"0.1.2","url":"https://denwwer.github.io/passduck/"},{"@type":"WebSite","name":"PassDuck","publisher":{"@type":"Person","name":"Boris","url":"https://github.com/denwwer"},"url":"https://denwwer.github.io/passduck/"}]}</script><script>function isSafari(){return/^((?!chrome|chromium|android).)*safari/i.test(navigator.userAgent)}function isChromium(){return!!window.chrome&&/chrome|chromium|crios/i.test(navigator.userAgent)}document.addEventListener("DOMContentLoaded",()=>{document.getElementById("year").innerText=new Date().getFullYear().toString(),isChromium()?document.getElementById("browser-1").hidden=!1:isSafari()&&(document.getElementById("browser-2").hidden=!1),document.getElementById("source").hidden=!1});</script><body>
     <header class="border-b border-primary pb-10 pt-5 px-6 text-center">
       <h1 class=title>
         <span class=inline>
-          <img id=duck class="cursor-pointer left-0.5 relative top-2" src=/passduck/logo.d0e6ea66.png width=24 height=24 alt=PassDuck><span class=text-dark>Pass</span>Duck
+          <img id=duck class="cursor-pointer left-0.5 relative top-2" src=/passduck/logo.d0e6ea66.png width=24 height=24 alt="PassDuck logo"><span class=text-dark>Pass</span>Duck
         </span>
       </h1>
       <p class="font-light leading-relaxed max-w-md mt-4 mx-auto text-secondary">
         A lightweight extension for instantly generating strong, <br>
         secure passwords.
       </p>
+      <h2 class=sr-only>
+        Free password and passphrase generator for Chrome, Brave, Edge and
+        Safari
+      </h2>
       <div class="flex gap-8 justify-center min-h-10 mt-8">
         <a hidden id=browser-1 href=https://chromewebstore.google.com/detail/nenogephcifkngdiakjgojpjdhekhkpj class="btn-icon button icon-chrome">
           <div class=icon-embed-sm>
@@ -61,15 +67,19 @@
     </header>
 
     
-    <section class="border-b border-primary px-6 py-16 section-1">
+    <section class="border-b border-primary px-6 py-16 section-1" aria-labelledby=features-passwords>
+      <h2 id=features-passwords class=sr-only>
+        Cryptographically secure password generation
+      </h2>
       <div class="gap-10 grid items-center max-w-5xl md:grid-cols-2 mx-auto">
         <div class="from-left screenshot">
-          <img src=/passduck/s-1.2d182222.png width=320 height=320>
+          <img src=/passduck/s-1.2d182222.png width=320 height=320 loading=lazy decoding=async alt="PassDuck popup generating a random password with an entropy meter and colour-coded characters">
         </div>
         <div class="md:text-left text-center">
           <ul class=list-disc>
             <li class=py-1>
-              <span class=marker>Cryptographically secure</span> random generation.
+              <span class=marker>Cryptographically secure</span> random
+              generation.
             </li>
             <li class=py-1>Real-time entropy meter.</li>
             <li class=py-1>Character highlighting for clarity.</li>
@@ -82,12 +92,16 @@
     </section>
 
     
-    <section class="bg-dark border-b border-primary px-6 py-16 section-2">
+    <section class="bg-dark border-b border-primary px-6 py-16 section-2" aria-labelledby=features-passphrases>
+      <h2 id=features-passphrases class=sr-only>
+        Passphrase generation from curated word lists
+      </h2>
       <div class="gap-10 grid items-center max-w-5xl md:grid-cols-2 mx-auto">
         <div class="md:order-1 md:text-left order-2 text-bg-dark text-center">
           <ul class=list-disc>
             <li class=py-1>
-               <span class=marker>Generate passphrases</span> from curated word lists.
+              <span class=marker>Generate passphrases</span> from curated word
+              lists.
             </li>
             <li class=py-1>Adjustable word count for your security needs.</li>
             <li class=py-1>
@@ -97,21 +111,25 @@
           </ul>
         </div>
         <div class="from-right md:order-2 order-1 screenshot">
-          <img src=/passduck/s-2.058fafd7.png width=320 height=320>
+          <img src=/passduck/s-2.058fafd7.png width=320 height=320 loading=lazy decoding=async alt="PassDuck popup generating a multi-word passphrase with an adjustable word count">
         </div>
       </div>
     </section>
 
     
-    <section class="border-b border-primary px-6 py-16 section-3">
+    <section class="border-b border-primary px-6 py-16 section-3" aria-labelledby=features-settings>
+      <h2 id=features-settings class=sr-only>
+        Customisable character sets, length and dark theme
+      </h2>
       <div class="gap-10 grid items-center max-w-5xl md:grid-cols-2 mx-auto">
         <div class="from-left screenshot">
-          <img src=/passduck/s-3.6a2cb0a3.png width=320 height=320>
+          <img src=/passduck/s-3.6a2cb0a3.png width=320 height=320 loading=lazy decoding=async alt="PassDuck settings showing character set options, password length slider and dark theme">
         </div>
         <div class="md:text-left text-center">
           <ul class=list-disc>
             <li class=py-1>
-              <span class=marker>Customize</span> your preferred character set.
+              <span class=marker>Customize</span> your preferred character
+              set.
             </li>
             <li class=py-1>Adjust password length.</li>
             <li class=py-1>Persisted states in settings.</li>
@@ -127,7 +145,14 @@
     
     <footer class="border-primary border-t px-6 py-10">
       <div class="max-w-5xl mx-auto text-center text-sm">
-        <p class=text-secondary>© <span id=year></span> PassDuck</p>
+        <nav class=text-secondary aria-label=Footer>
+          <a class="underline underline-offset-2" href=https://chromewebstore.google.com/detail/nenogephcifkngdiakjgojpjdhekhkpj>Chrome Web Store</a>
+          ·
+          <a class="underline underline-offset-2" href="https://apps.apple.com/app/passduck-password-generator/id6756817549?mt=12">App Store</a>
+          ·
+          <a class="underline underline-offset-2" href=https://github.com/denwwer/passduck>Source code</a>
+        </nav>
+        <p class="mt-2 text-secondary">© <span id=year></span> PassDuck</p>
       </div>
     </footer>
 
