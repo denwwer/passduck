@@ -1,6 +1,6 @@
 {
   "name": "passduck",
-  "version": "2.0.0",
+  "version": "0.1.2",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/denwwer/passduck.git"
@@ -8,7 +8,7 @@
   "license": "MIT",
   "scripts": {
     "landing": "parcel serve landing/index.html --public-url /",
-    "landing-build": "parcel build landing/index.html --no-source-maps --public-url /passduck/",
+    "landing:build": "parcel build landing/index.html --no-source-maps --public-url /passduck/",
     "pwa": "parcel serve pwa/index.html --public-url /",
     "test": "exit 1",
     "lint": "eslint . --fix",
@@ -17,6 +17,7 @@
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@parcel/packager-raw-url": "^2.16.3",
+    "@parcel/transformer-jsonld": "^2.16.3",
     "@parcel/transformer-webmanifest": "^2.16.3",
     "@tailwindcss/postcss": "^4.1.18",
     "eslint": "^10.5.0",
